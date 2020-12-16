@@ -170,6 +170,9 @@ variable role_mapping {
 variable aks_clusters {
   default = {}
 }
+variable api_managements {
+  default = {}
+}
 variable databricks_workspaces {
   default = {}
 }
