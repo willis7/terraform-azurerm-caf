@@ -11,41 +11,42 @@ resource_groups = {
   }
 }
 
-event_hub_namespaces = {
-  evh1 = {
-    name               = "evh1"
-    resource_group_key = "sec_center"
-    sku                = "Standard"
-    region             = "region1"
-  }
-}
-
 security_center_automation = {
   automation1 = {
-    name = "sec-center"
+    name               = "sec-center"
     resource_group_key = "sec_center"
-    type = "EventHub"
-    eventhub_namespace_key = "evh1"
-    eventhub_data = {
-      action1= {
-        type = "EventHub"
+    type               = "EventHub"
+
+    actions = {
+      action1 = {
+        type                   = "EventHub"
+        eventhub_namespace_key = "central_logs_region1"
+        destination_key        = "central_logs"
+      }
+      action2 = {
+        type              = "LogAnalytics"
+        log_analytics_key = "log_analytics_key"
+        destination_key   = "central_logs"
       }
     }
-    source = {
-      source1= {
+
+    sources = {
+      source1 = {
         event_source = "Assessments"
         ruleset = {
-          ruleset1 ={
+          ruleset1 = {
             property_path  = "properties.metadata.severity"
             operator       = "Equals"
             expected_value = "High"
             property_type  = "String"
           }
-          
+
         }
       }
+      source2 = {
+        event_source = "Alerts"
+      }
     }
-
   }
 
 }
