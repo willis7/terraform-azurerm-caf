@@ -161,6 +161,19 @@ virtual_machines = {
         # Relative path to the configuration folder or full path
         xml_diagnostics_file = "./diagnostics/wadcfg.xml"
       }
+
+      microsoft_azure_domainJoin = {
+        name = "microsoft_azue_dromainJoin"
+        domain_name = "dns.contoso.com"
+        ou_path = ""
+        user = "user@contoso.com"
+        restart = "true"
+        options = "3"
+        secret_prefix = "wvd-tenant"
+        lz_key = "examples"
+        keyvault_key = "wvd_kv"
+      }
+
     }
   }
 
