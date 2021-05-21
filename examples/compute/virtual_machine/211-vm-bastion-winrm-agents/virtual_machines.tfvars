@@ -150,6 +150,9 @@ virtual_machines = {
     }
 
     virtual_machine_extensions = {
+
+      secret_prefix = "test"
+      
       microsoft_enterprise_cloud_monitoring = {
         diagnostic_log_analytics_key = "central_logs_region1"
       }
@@ -163,6 +166,7 @@ virtual_machines = {
       }
 
       microsoft_azure_domainJoin = {
+        secret_prefix = "test"
         name = "microsoft_azue_dromainJoin"
         domain_name = "dns.contoso.com"
         ou_path = ""
