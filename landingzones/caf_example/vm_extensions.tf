@@ -40,3 +40,20 @@ module "vm_extension_diagnostics" {
     diagnostics_storage_account_keys = each.value.virtual_machine_extensions.microsoft_azure_diagnostics.diagnostics_storage_account_keys
   }
 }
+
+module "microsoft_azure_domainJoin" {
+  source     = "../../../../../modules/compute/virtual_machine_extensions"
+  depends_on = [module.example]
+
+  for_each = {
+    for key, value in try(var.virtual_machines, {}) : key => value
+    if try(value.virtual_machine_extensions.microsoft_azure_domainJoin, null) != null
+  }
+
+  client_config      = module.example.client_config
+  virtual_machine_id = module.example.virtual_machines[each.key].id
+  keyvault_id        = local.combined.keyvaults[try(each.value.virtual_machine_extensions.microsoft_azure_domainJoin.lz_key, module.caf.client_config.landingzone_key)][each.value.virtual_machine_extensions.microsoft_azure_domainJoin.keyvault_key].id
+  extension          = each.value.virtual_machine_extensions.microsoft_azure_domainJoin
+  extension_name     = "microsoft_azure_domainJoin"
+  
+}

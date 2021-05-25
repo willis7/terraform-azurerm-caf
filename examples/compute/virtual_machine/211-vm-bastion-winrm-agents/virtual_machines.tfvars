@@ -151,8 +151,7 @@ virtual_machines = {
 
     virtual_machine_extensions = {
 
-      secret_prefix = "test"
-      
+            
       microsoft_enterprise_cloud_monitoring = {
         diagnostic_log_analytics_key = "central_logs_region1"
       }
@@ -167,13 +166,12 @@ virtual_machines = {
 
       microsoft_azure_domainJoin = {
         secret_prefix = "test"
-        name = "microsoft_azue_dromainJoin"
-        domain_name = "dns.contoso.com"
+        name = "microsoft_azue_domainJoin"
+        domain_name = "microsoft.com"
         ou_path = ""
-        user = "user@contoso.com"
+        user = "v-akeloth@microsoft.com"
         restart = "true"
-        options = "3"
-        secret_prefix = "wvd-tenant"
+        options = "3"        
         lz_key = "examples"
         keyvault_key = "wvd_kv"
       }
