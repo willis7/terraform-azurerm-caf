@@ -6,11 +6,25 @@ locals {
     use_slug      = try(var.settings.global_settings.use_slug, var.global_settings.use_slug)
   }
 
-  password_policy = try(var.settings.password_policy, var.password_policy)
-  user_name       = var.settings.user_name
-  tenant_name     = lookup(var.settings, "tenant_name", data.azuread_domains.aad_domains.domains[0].domain_name)
-  keyvault_id     = var.keyvaults[var.client_config.landingzone_key][var.settings.keyvault_key].id
-  secret_prefix   = lookup(var.settings, "secret_prefix", "")
+  password_policy       = try(var.settings.password_policy, var.password_policy)
+  user_name             = var.settings.user_name
+  keyvault_id           = var.keyvaults[var.client_config.landingzone_key][var.settings.keyvault_key].id
+  secret_prefix         = var.settings.secret_prefix == null ? "" : var.settings.secret_prefix
+  account_enabled       = var.settings.account_enabled
+  city                  = var.settings.city
+  company_name          = var.settings.company_name
+  department            = var.settings.department
+  force_password_change = var.settings.force_password_change
+  given_name            = var.settings.given_name
+  job_title             = var.settings.job_title
+  mail_nickname         = var.settings.mail_nickname
+  mobile                = var.settings.mobile
+  postal_code           = var.settings.postal_code
+  state                 = var.settings.state
+  street_address        = var.settings.street_address
+  surname               = var.settings.surname
+  usage_location        = var.settings.usage_location
+  tenant_name           = lookup(var.settings, "tenant_name", data.azuread_domains.aad_domains.domains[0].domain_name)
 }
 
 resource "azurecaf_name" "account" {
@@ -27,9 +41,23 @@ resource "azurecaf_name" "account" {
 #
 #
 resource "azuread_user" "account" {
-  user_principal_name = format("%s@%s", azurecaf_name.account.result, local.tenant_name)
-  display_name        = azurecaf_name.account.result
-  password            = random_password.pwd.result
+  user_principal_name   = format("%s@%s", azurecaf_name.account.result, local.tenant_name)
+  display_name          = azurecaf_name.account.result
+  password              = random_password.pwd.result
+  account_enabled       = local.account_enabled
+  city                  = local.city
+  company_name          = local.company_name
+  department            = local.department
+  force_password_change = local.force_password_change
+  given_name            = local.given_name
+  job_title             = local.job_title
+  mail_nickname         = local.mail_nickname
+  mobile                = local.mobile
+  postal_code           = local.postal_code
+  state                 = local.state
+  street_address        = local.street_address
+  surname               = local.surname
+  usage_location        = local.usage_location
 
   lifecycle {
     ignore_changes = [user_principal_name]

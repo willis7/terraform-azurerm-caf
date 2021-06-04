@@ -4,7 +4,43 @@ variable "global_settings" {
 variable "client_config" {
   description = "Client configuration object (see module README.md)."
 }
-variable "settings" {}
+variable "settings" {
+  description = ""
+  type = object({
+    user_name             = string
+    keyvault_key          = string
+    secret_prefix         = optional(string)
+    account_enabled       = optional(bool)
+    city                  = optional(string)
+    company_name          = optional(string)
+    department            = optional(string)
+    force_password_change = optional(bool)
+    given_name            = optional(string)
+    job_title             = optional(string)
+    mail_nickname         = optional(string)
+    mobile                = optional(string)
+    postal_code           = optional(string)
+    state                 = optional(string)
+    street_address        = optional(string)
+    surname               = optional(string)
+    usage_location        = optional(string)
+    password_policy = object({
+      length         = number
+      special        = bool
+      upper          = bool
+      number         = bool
+      expire_in_days = number
+      rotation = object({
+        mins = number
+      })
+    })
+    global_settings = optional(object({
+      random_length = number
+      passthrough   = bool
+      use_slug      = bool
+    }))
+  })
+}
 variable "keyvaults" {}
 variable "password_policy" {
   description = "Map to define the password policy to apply"
