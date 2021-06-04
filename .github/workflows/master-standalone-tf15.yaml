@@ -42,6 +42,7 @@ jobs:
             "azuread/100-sevice-principle-with-builtin-roles",
             "azuread/101-service-principle-with-custom-roles",
             "azuread/102-password-rotation",
+            "azuread/103-users",
             "compute/availability_set/100-simple-availabilityset",
             "compute/availability_set/101-availabilityset-with-proximity-placement-group",
             "compute/container_groups/101-aci-rover",
