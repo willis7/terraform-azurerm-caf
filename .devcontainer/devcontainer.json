@@ -9,7 +9,6 @@
     "service": "rover",
 
     // Container user to use in VSCode Online and GitHub Codespaces
-    "containerUser" : "vscode",
     "remoteUser": "vscode",
 
     // The optional 'workspaceFolder' property is the path VS Code should open by default when
@@ -21,6 +20,7 @@
     "settings": {
         "files.eol": "\n",
         "editor.tabSize": 2,
+        "terminal.integrated.defaultProfile.linux": "zsh",
         "terminal.integrated.scrollback": 32000,
     },
 
