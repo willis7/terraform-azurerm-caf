@@ -121,6 +121,7 @@ module "example" {
     synapse_workspaces                 = var.synapse_workspaces
   }
   networking = {
+    api_management                                          = var.api_managements
     application_gateway_applications                        = var.application_gateway_applications
     application_gateway_waf_policies                        = var.application_gateway_waf_policies
     application_gateways                                    = var.application_gateways

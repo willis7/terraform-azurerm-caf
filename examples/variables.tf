@@ -558,3 +558,7 @@ variable "nat_gateways" {
 variable "cognitive_services_account" {
   default = {}
 }
+
+variable "api_managements" {
+  default = {}
+}
